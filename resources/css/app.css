@@ -39,7 +39,7 @@ html {
         --sidebar-foreground: 240 5.3% 26.1%;
         --sidebar-primary: 0 0% 10%;
         --sidebar-primary-foreground: 0 0% 98%;
-        --sidebar-accent: 0 0% 94%;
+        --sidebar-accent: 224.55 100% 86% / 0.19;
         --sidebar-accent-foreground: 0 0% 30%;
         --sidebar-border: 0 0% 91%;
         --sidebar-ring: 217.2 91.2% 59.8%;
@@ -74,7 +74,7 @@ html {
         --sidebar-foreground: 0 0% 95.9%;
         --sidebar-primary: 360, 100%, 100%;
         --sidebar-primary-foreground: 0 0% 100%;
-        --sidebar-accent: 0 0% 15.9%;
+        --sidebar-accent: 223.81 0% 15%;
         --sidebar-accent-foreground: 240 4.8% 95.9%;
         --sidebar-border: 0 0% 15.9%;
         --sidebar-ring: 217.2 91.2% 59.8%;
