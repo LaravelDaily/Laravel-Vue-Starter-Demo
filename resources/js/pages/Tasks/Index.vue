@@ -2,9 +2,20 @@
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import AppLayout from '@/layouts/AppLayout.vue';
-import { Task } from '@/types';
+import { type BreadcrumbItem, Task } from '@/types';
 import { Head, Link, router } from '@inertiajs/vue3';
 import { toast } from 'vue-sonner';
+
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'Dashboard',
+        href: '/dashboard',
+    },
+    {
+        title: 'Tasks',
+        href: '/tasks',
+    },
+];
 
 interface Props {
     tasks: Task[];
@@ -21,8 +32,8 @@ const deleteTask = (id: number) => {
 </script>
 
 <template>
-    <AppLayout>
-        <Head title="Tasks List" />
+    <AppLayout :breadcrumbs="breadcrumbs">
+        <Head title="Tasks List"/>
 
         <div class="mt-4">
             <Link :class="buttonVariants({ variant: 'outline' })" href="/tasks/create"> Create Task</Link>
@@ -44,7 +55,7 @@ const deleteTask = (id: number) => {
                     </TableCell>
                     <TableCell class="flex gap-x-2 text-right">
                         <Link :class="buttonVariants({ variant: 'default' })" :href="`/tasks/${task.id}/edit`">Edit </Link>
-                        <Button variant="destructive" @click="deleteTask(task.id)" class="mr-2">Delete </Button>
+                        <Button variant="destructive" @click="deleteTask(task.id)" class="mr-2">Delete</Button>
                     </TableCell>
                 </TableRow>
             </TableBody>

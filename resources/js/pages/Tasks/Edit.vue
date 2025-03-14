@@ -1,13 +1,18 @@
 <script setup lang="ts">
 import InputError from '@/components/InputError.vue';
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/AppLayout.vue';
-import { Task } from '@/types';
+import { BreadcrumbItem, Task } from '@/types';
 import { Head, useForm } from '@inertiajs/vue3';
 import { Switch } from '@/components/ui/switch';
+
+const breadcrumbs: BreadcrumbItem[] = [
+    { title: 'Dashboard', href: '/dashboard' },
+    { title: 'Tasks', href: '/tasks' },
+    { title: 'Edit', href: '' },
+];
 
 interface Props {
     task: Task;
@@ -30,7 +35,7 @@ const submitForm = () => {
 </script>
 
 <template>
-    <AppLayout>
+    <AppLayout :breadcrumbs="breadcrumbs">
         <Head title="Edit Task" />
         <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
             <form class="space-y-6" @submit.prevent="submitForm">

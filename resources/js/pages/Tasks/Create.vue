@@ -5,6 +5,13 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
+import { BreadcrumbItem } from '@/types';
+
+const breadcrumbs: BreadcrumbItem[] = [
+    { title: 'Dashboard', href: '/dashboard' },
+    { title: 'Tasks', href: '/tasks' },
+    { title: 'Create', href: '/tasks' },
+];
 
 const form = useForm({
     name: '',
@@ -18,7 +25,7 @@ const submitForm = () => {
 </script>
 
 <template>
-    <AppLayout>
+    <AppLayout :breadcrumbs="breadcrumbs">
         <Head title="Create Task" />
         <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
             <form class="space-y-6" @submit.prevent="submitForm">
