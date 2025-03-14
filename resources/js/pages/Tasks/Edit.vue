@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { Task } from '@/types';
 import { Head, useForm } from '@inertiajs/vue3';
+import { Switch } from '@/components/ui/switch';
 
 interface Props {
     task: Task;
@@ -44,7 +45,7 @@ const submitForm = () => {
                 <div class="grid gap-2">
                     <Label htmlFor="is_completed">Completed?</Label>
 
-                    <Checkbox id="is_completed" v-model:checked="form.is_completed" class="mt-1" />
+                    <Switch id="is_completed" v-model="form.is_completed" class="mt-1" />
 
                     <InputError :message="form.errors.is_completed" />
                 </div>
