@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { Task } from '@/types';
-import { Head, router } from '@inertiajs/vue3';
-import { Button } from '@/components/ui/button';
+import { Head, router, Link } from '@inertiajs/vue3';
 import { toast } from 'vue-sonner';
 
 interface Props {
@@ -22,7 +22,12 @@ const deleteTask = (id: number) => {
 
 <template>
     <AppLayout>
-        <Head title="Index" />
+        <Head title="Tasks List" />
+
+        <div class="mt-4">
+            <Link :class="buttonVariants({variant: 'outline'})" href="/tasks/create"> Create Task </Link>
+        </div>
+
         <Table class="mt-4">
             <TableHeader>
                 <TableRow>
@@ -34,14 +39,11 @@ const deleteTask = (id: number) => {
             <TableBody>
                 <TableRow v-for="task in tasks" :key="task.id">
                     <TableCell>{{ task.name }}</TableCell>
-                    <TableCell :class="{'text-green-600': task.is_completed, 'text-red-700': !task.is_completed}">
+                    <TableCell :class="{ 'text-green-600': task.is_completed, 'text-red-700': !task.is_completed }">
                         {{ task.is_completed ? 'Completed' : 'In Progress' }}
                     </TableCell>
                     <TableCell class="text-right">
-                        <Button
-                            variant="destructive"
-                            @click="deleteTask(task.id)"
-                            class="mr-2">Delete</Button>
+                        <Button variant="destructive" @click="deleteTask(task.id)" class="mr-2">Delete </Button>
                     </TableCell>
                 </TableRow>
             </TableBody>
