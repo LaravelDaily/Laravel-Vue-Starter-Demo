@@ -2,9 +2,10 @@
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import AppLayout from '@/layouts/AppLayout.vue';
-import { type BreadcrumbItem, Task } from '@/types';
+import { type BreadcrumbItem, PaginatedResponse, Task } from '@/types';
 import { Head, Link, router } from '@inertiajs/vue3';
 import { toast } from 'vue-sonner';
+import Pagination from '@/components/Pagination.vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -18,7 +19,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 interface Props {
-    tasks: Task[];
+    tasks: PaginatedResponse<Task>;
 }
 
 defineProps<Props>();
@@ -33,7 +34,7 @@ const deleteTask = (id: number) => {
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbs">
-        <Head title="Tasks List"/>
+        <Head title="Tasks List" />
 
         <div class="mt-4">
             <Link :class="buttonVariants({ variant: 'outline' })" href="/tasks/create"> Create Task</Link>
@@ -48,7 +49,7 @@ const deleteTask = (id: number) => {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                <TableRow v-for="task in tasks" :key="task.id">
+                <TableRow v-for="task in tasks.data" :key="task.id">
                     <TableCell>{{ task.name }}</TableCell>
                     <TableCell :class="{ 'text-green-600': task.is_completed, 'text-red-700': !task.is_completed }">
                         {{ task.is_completed ? 'Completed' : 'In Progress' }}
@@ -60,5 +61,7 @@ const deleteTask = (id: number) => {
                 </TableRow>
             </TableBody>
         </Table>
+
+        <Pagination :resource="tasks" />
     </AppLayout>
 </template>
