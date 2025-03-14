@@ -34,7 +34,7 @@ const deleteTask = (id: number) => {
             <TableBody>
                 <TableRow v-for="task in tasks" :key="task.id">
                     <TableCell>{{ task.name }}</TableCell>
-                    <TableCell class="{{ task.is_completed ? 'text-green-600' : 'text-red-700'}}">
+                    <TableCell :class="{'text-green-600': task.is_completed, 'text-red-700': !task.is_completed}">
                         {{ task.is_completed ? 'Completed' : 'In Progress' }}
                     </TableCell>
                     <TableCell class="text-right">
