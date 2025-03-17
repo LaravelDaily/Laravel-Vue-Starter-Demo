@@ -1,11 +1,16 @@
 <script setup lang="ts">
+import Pagination from '@/components/Pagination.vue';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem, PaginatedResponse, Task } from '@/types';
 import { Head, Link, router } from '@inertiajs/vue3';
+import { DateFormatter } from '@internationalized/date';
 import { toast } from 'vue-sonner';
-import Pagination from '@/components/Pagination.vue';
+
+const df = new DateFormatter('en-US', {
+    dateStyle: 'long',
+});
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -44,7 +49,8 @@ const deleteTask = (id: number) => {
             <TableHeader>
                 <TableRow>
                     <TableHead>Task</TableHead>
-                    <TableHead class="w-[100px]">Status</TableHead>
+                    <TableHead class="w-[200px]">Status</TableHead>
+                    <TableHead class="w-[200px]">Due Date</TableHead>
                     <TableHead class="w-[200px] text-right">Actions</TableHead>
                 </TableRow>
             </TableHeader>
@@ -54,6 +60,7 @@ const deleteTask = (id: number) => {
                     <TableCell :class="{ 'text-green-600': task.is_completed, 'text-red-700': !task.is_completed }">
                         {{ task.is_completed ? 'Completed' : 'In Progress' }}
                     </TableCell>
+                    <TableCell>{{ task.due_date ? df.format(new Date(task.due_date)) : '' }}</TableCell>
                     <TableCell class="flex gap-x-2 text-right">
                         <Link :class="buttonVariants({ variant: 'default' })" :href="`/tasks/${task.id}/edit`">Edit </Link>
                         <Button variant="destructive" @click="deleteTask(task.id)" class="mr-2">Delete</Button>
