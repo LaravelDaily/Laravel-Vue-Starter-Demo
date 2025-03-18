@@ -36,26 +36,26 @@ export interface User {
 }
 
 export interface MediaFile {
-    id: number,
-    model_type: string,
-    model_id: number,
-    uuid: string,
-    collection_name: string,
-    name: string,
-    file_name: string,
-    mime_type: string,
-    disk: string,
-    conversions_disk: string,
-    size: number,
-    manipulations: string[],
-    custom_properties: string[],
-    generated_conversions: string[],
-    responsive_images: string[],
-    order_column: number,
-    created_at: string,
-    updated_at: string,
-    original_url: string,
-    preview_url: string,
+    id: number;
+    model_type: string;
+    model_id: number;
+    uuid: string;
+    collection_name: string;
+    name: string;
+    file_name: string;
+    mime_type: string;
+    disk: string;
+    conversions_disk: string;
+    size: number;
+    manipulations: string[];
+    custom_properties: string[];
+    generated_conversions: string[];
+    responsive_images: string[];
+    order_column: number;
+    created_at: string;
+    updated_at: string;
+    original_url: string;
+    preview_url: string;
 }
 
 export interface Task {
@@ -68,7 +68,16 @@ export interface Task {
     updated_at: string;
 }
 
-export interface PaginatedResponse<T = Task | null> {
+export interface TaskCategory {
+    id: number;
+    name: string;
+    tasks_count: number | null;
+    tasks: Task[] | null;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface PaginatedResponse<T = Task | TaskCategory | null> {
     current_page: number;
     data: T[];
     first_page_url: string;
