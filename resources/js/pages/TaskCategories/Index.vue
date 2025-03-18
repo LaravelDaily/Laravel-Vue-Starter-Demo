@@ -5,12 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem, PaginatedResponse, TaskCategory } from '@/types';
 import { Head, Link, router } from '@inertiajs/vue3';
-import { DateFormatter } from '@internationalized/date';
 import { toast } from 'vue-sonner';
-
-const df = new DateFormatter('en-US', {
-    dateStyle: 'long',
-});
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
