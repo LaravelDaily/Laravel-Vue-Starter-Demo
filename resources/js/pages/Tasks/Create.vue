@@ -7,16 +7,25 @@ import { Label } from '@/components/ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { cn } from '@/lib/utils';
-import { BreadcrumbItem } from '@/types';
+import { BreadcrumbItem, TaskCategory } from '@/types';
 import { Head, useForm } from '@inertiajs/vue3';
 import { DateFormatter, getLocalTimeZone } from '@internationalized/date';
 import { CalendarIcon } from 'lucide-vue-next';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Tasks', href: '/tasks' },
     { title: 'Create', href: '/tasks' },
 ];
+
+interface Props {
+    categories: TaskCategory[];
+}
+
+const props = defineProps<Props>();
+
+const categories = props.categories;
 
 const df = new DateFormatter('en-US', {
     dateStyle: 'long',
@@ -26,6 +35,7 @@ const form = useForm({
     name: '',
     due_date: '',
     media: '',
+    categories: [],
 });
 
 const fileSelected = (event: Event) => {
@@ -91,6 +101,18 @@ const submitForm = () => {
                     <progress v-if="form.progress" :value="form.progress.percentage" max="100">{form.progress.percentage}%</progress>
 
                     <InputError :message="form.errors.media" />
+                </div>
+
+                <div class="grid gap-2">
+                    <Label htmlFor="categories">Categories</Label>
+
+                    <ToggleGroup type="multiple" variant="outline" size="lg" v-model="form.categories">
+                        <ToggleGroupItem v-for="category in categories" :key="category.id" :value="category.id">
+                            {{ category.name }}
+                        </ToggleGroupItem>
+                    </ToggleGroup>
+
+                    <InputError :message="form.errors.categories" />
                 </div>
 
                 <div class="flex items-center gap-4">
