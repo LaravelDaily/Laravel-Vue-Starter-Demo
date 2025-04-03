@@ -44,7 +44,7 @@ const props = withDefaults(defineProps<Props>(), {
                         <Button
                             class="h-10 w-10 p-0"
                             :variant="item.value === props.resource.current_page ? 'default' : 'outline'"
-                            v-on:click="() => router.visit(props.resource.path + '?page=' + item.value)"
+                            v-on:click="() =>  router.visit(props.resource.links[index+1].url)"
                         >
                             {{ item.value }}
                         </Button>

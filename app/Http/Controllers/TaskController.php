@@ -21,7 +21,8 @@ class TaskController extends Controller
                         $query->whereIn('id', $request->query('categories'));
                     });
                 })
-                ->paginate(20),
+                ->paginate(20)
+                ->withQueryString(),
             'categories' => TaskCategory::whereHas('tasks')->withCount('tasks')->get(),
             'selectedCategories' => $request->query('categories', []),
         ]);
